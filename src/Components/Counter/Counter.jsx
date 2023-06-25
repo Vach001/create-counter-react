@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./counter.module.css";
 
-function Counter() {
-  const [counter, setCounter] = useState(0);
-  const [initialCount, setInitialCount] = useState(0);
-  const handleInitialCountChange = (event) => {
-    setInitialCount(event.target.value);
+export default function Counter() {
+  const stroedCounter = JSON.parse(localStorage.getItem("counter"));
+  const maxNumber = 25;
+  const minNumber = 1;
+  const step = 1;
+  const [counter, setCounter] = useState(stroedCounter ?? 0);
+
+  useEffect(() => {
+    localStorage.setItem("counter", JSON.stringify(counter));
+
+    const storedCounter = JSON.parse(localStorage.getItem("counter"));
+    console.log(storedCounter);
+  }, [counter]);
+
+  const handleClick = function (number) {
+    setCounter((prev) => {
+      console.log(localStorage);
+      return prev + number;
+    });
   };
-  const handleReset = () => {
-    setCounter(initialCount);
-  };
+
+  const handleReset = () => setCounter(0);
+
   return (
     <div className={styles.counterContainer}>
-      <button onClick={() => setCounter(counter + 1)}>Increment</button>
-      <button onClick={() => setCounter(counter - 1)}>Decrement</button>
-      <button onClick={handleReset}>Reset</button>
+      <button onClick={() => handleClick(step)} disabled={counter >= maxNumber}>
+        Increment
+      </button>
+      <button onClick={() => handleClick(-step)} disabled={counter < minNumber}>
+        Decrement
+      </button>
+      <button onClick={() => handleReset()}>Reset</button>
       <p>Count: {counter}</p>
     </div>
   );
 }
-export default Counter;
