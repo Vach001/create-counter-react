@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Counter from './Components/Counter/Counter';
+import "./App.css";
+import Counter from "./Components/Counter/Counter.jsx";
+import Header from "./Components/Header/Header.jsx";
 
 function App() {
   return (
-    <div className="App">    
-      <Counter/>
+    <div className="App">
+      <Header />
+      <Counter />
     </div>
   );
 }
