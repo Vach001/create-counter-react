@@ -10,7 +10,7 @@ button {
   transition: all 0.3s ease;
 }
 button:hover {
-  background-color: #3e8e41;
+  background-color: #4daa50;
 }
 button:active {
   transform: scale(0.95);
