@@ -1,3 +1,8 @@
+.counterContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 button {
   padding: 10px 20px;
   background-color: #90b7f3;
