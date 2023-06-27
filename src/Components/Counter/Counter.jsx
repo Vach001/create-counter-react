@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./counter.module.css";
 
 export default function Counter() {
-  const stroedCounter = JSON.parse(localStorage.getItem("counter"));
+  const storedCounter = JSON.parse(localStorage.getItem("counter"));
   const maxNumber = 25;
   const minNumber = 1;
   const step = 1;
-  const [counter, setCounter] = useState(stroedCounter ?? 0);
+  const [counter, setCounter] = useState(storedCounter ?? 0);
 
   useEffect(() => {
     localStorage.setItem("counter", JSON.stringify(counter));
