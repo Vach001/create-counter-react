@@ -23,3 +23,14 @@ button:active {
 button:focus {
   outline: none;
 }
+button:disabled{
+background-color: azure;
+color: #0456d1;
+}
+
+.count{
+  display: flex;
+  justify-content: center;
+  color: #396bb6;
+  font-size: 25px;
+}

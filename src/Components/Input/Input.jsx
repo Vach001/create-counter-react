@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function input({ labelText, type, name, value = "" }) {
+export default function Input({ type, labelText, name, value = "" }) {
   const [state, setState] = useState(value);
 
   const handelChange = (e) => {

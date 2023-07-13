@@ -2,63 +2,58 @@ import React, { useEffect, useState } from "react";
 import styles from "./counter.module.css";
 import { useReducer } from "../../hooks/useReducer";
 import {counterReducer} from "../../helpers/counterReducer";
+import Input from "../Input/Input";
 
 export default function Counter() {
-  const [counter, setCounter] = useReducer(counterReducer, 0);
+  const [counter, counterDispatch] = useReducer(counterReducer, 0);
 
   const storedCounter = JSON.parse(localStorage.getItem("counter"));
-  const [maxNumber, setMaxNumber] = useState(100);
-  const [minNumber, setMinNumber] = useState(-100);
-  const [step, setStep] = useState(2);
+  const [maxNumber, setMaxNumber] = useState(25);
+  const [minNumber, setMinNumber] = useState(-20);
+  const [step, setStep] = useState(5);
 
-
-  useEffect(() => {
-    localStorage.setItem("counter", JSON.stringify(counter));
-
-    const storedCounter = JSON.parse(localStorage.getItem("counter"));
-    console.log(storedCounter);
-  }, [counter]);
-
-  const handleClick = function (number) {
-    setCounter((prev) => {
-      console.log(localStorage);
-      return prev + number;
-    });
-  };
-return (
+  return (
     <> 
       <div style={{
             margin: "auto",
+            padding:"10px, 10px",
             width: "40%",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end"
           }}
         >
-        <input type="text" labelText="Max Value:" name= {maxNumber} />
-        <input type="text" labelText="Min Value:" name= {minNumber} />
-        <input type="text" labelText="Step:" name= {step} />
+        <Input type="number" labelText="Max Value:" name= {maxNumber} />
+        <Input type="number" labelText="Min Value:" name= {minNumber} />
+        <Input type="number" labelText="Step:" name= {step} />
       </div>
 
-      <p>COUNTER: {counter}</p>
+      <p className={styles.count}>COUNTER:  <b>{ counter }</b></p>
       
-      <div>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin:"auto"
+      }}>
         <button 
-          onClick={() => setCounter({
+          onClick={() => counterDispatch({
             type: "increment",
-            payload: step })}
-          disabled={counter + step > maxNumber}>
+            payload: step})}
+          disabled={counter + step > maxNumber}
+          >
           Increment
         </button>
         <button 
-          onClick={() => setCounter({
+          onClick={() => counterDispatch({
             type: "decrement",
             payload: step })}
-          disabled={counter - step < minNumber}>
+          disabled={counter - step < minNumber}
+          >
           Decrement
         </button>
         <button 
-          onClick={() => setCounter({
+          onClick={() => counterDispatch({
             type: "reset" })}
         >
           Reset
