@@ -7,9 +7,19 @@ import Input from "../Input/Input";
 export default function Counter() {
   const [counter, counterDispatch] = useReducer(counterReducer, 0);
 
-  const [maxNumber, setMaxNumber] = useState(25);
-  const [minNumber, setMinNumber] = useState(-20);
+  const [maxNumber, setMaxNumber] = useState();
+  const [minNumber, setMinNumber] = useState();
   const [step, setStep] = useState(5);
+
+  const handleMaxNumber = (e) => {
+    setMaxNumber(e.target.value);
+  };
+  const handleMinNumber = (e) => {
+    setMinNumber(e.target.value);
+  };
+  const handleStep = (e) => {
+    setStep(e.target.value);
+  };
 
   return (
     <>
@@ -23,9 +33,9 @@ export default function Counter() {
           alignItems: "flex-end",
         }}
       >
-        <Input type="number" labelText="Max Value:" name={maxNumber} />
-        <Input type="number" labelText="Min Value:" name={minNumber} />
-        <Input type="number" labelText="Step:" name={step} />
+        <Input type="number" labelText="Max Value:" onChange={handleMaxNumber} name={maxNumber} />
+        <Input type="number" labelText="Min Value:" onChange={handleMinNumber} name={minNumber} />
+        <Input type="number" labelText="Step:" onChange={handleStep} name={step} />
       </div>
 
       <p className={styles.count}>
